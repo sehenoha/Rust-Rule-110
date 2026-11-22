@@ -1,0 +1,4 @@
+    Checking rule110 v0.1.0 (/Users/seheno/cours-info/rust/Rust-Rule-110/rule110)
+error: could not compile `rule110` (bin "rule110" test) due to 12 previous errors
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `rule110` (bin "rule110") due to 12 previous errors

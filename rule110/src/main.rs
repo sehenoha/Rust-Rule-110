@@ -15,31 +15,31 @@ fn main() {
     play(10);
 }
 
-fn play(const N:u64){
-    let mut data= [255; 3*(const N)*(const N)];
+fn play<const N:u64>(const N:u64){
+    let mut data= [255; 3*(N)*( N)];
     let mut jeu_pair= [0;N+1]; //état du jeu après le tour n_iter si n_iter pair
     let mut jeu_impair= [0;N+1]; //état du jeu après le tour n_iter si n_iter impair
     
     //initialisation de la première ligne
-    jeu_pair[(const N)-1]=1;
-    for k in 0..3 {data[3*((const N)-1)+k]=255};
+    jeu_pair[ N-1]=1;
+    for k in 0..3 {data[3*( N-1)+k]=255};
     
     //boucle
-    for n_iter in 1..(const N) { 
+    for n_iter in 1.. N { 
     if n_iter%2==0 {
         //on traite le bord
         if jeu_impair[1]==1{
             jeu_pair[0]=1}
         else {jeu_pair[0]=0};
         
-        for k in 0..3 {data[n_iter*3*(const N)+k]=255*jeu_pair[0]};
+        for k in 0..3 {data[n_iter*3* N+k]=255*jeu_pair[0]};
         
-        for ind in 0..(const N) { 
+        for ind in 0.. N { 
             match (jeu_impair[ind-1],jeu_impair[ind],jeu_impair[ind+1]) {
                 x if search([(1,1,1),(1,0,0),(0,0,0)],x) => jeu_pair[ind]=0,
                 _ => jeu_pair[ind]=1,
             };
-            for k in 0..3 {data[n_iter*3*(const N)+3*ind+k]=255*jeu_pair[ind]};
+            for k in 0..3 {data[n_iter*3* N+3*ind+k]=255*jeu_pair[ind]};
         };
 
     }
@@ -48,14 +48,14 @@ fn play(const N:u64){
             jeu_impair[0]=1}
         else {jeu_impair[0]=0};
         
-        for k in 0..3 {data[n_iter*3*(const N)+k]=255*jeu_impair[0]};
+        for k in 0..3 {data[n_iter*3*N+k]=255*jeu_impair[0]};
         
-        for ind in 0..(const N) { 
+        for ind in 0..N { 
             match (jeu_pair[ind-1],jeu_pair[ind],jeu_pair[ind+1]) {
                 x if search([(1,1,1),(1,0,0),(0,0,0)],x) => jeu_impair[ind]=0,
                 _ => jeu_impair[ind]=1,
             };
-            for k in 0..3 {data[n_iter*3*(const N)+3*ind+k]=255*jeu_impair[ind]}
+            for k in 0..3 {data[n_iter*3*N+3*ind+k]=255*jeu_impair[ind]}
         };
 
     };
